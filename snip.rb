@@ -19,7 +19,7 @@ DataMapper.setup(:default, ENV['DATABASE_URL'] || 'mysql://root:root@localhost/s
 class Url
   include DataMapper::Resource
   property  :id,          Serial
-  property  :original,    String, :length => 255
+  property  :original,    String, :length => 512
   property  :created_at,  DateTime  
   def snipped() self.id.alphadecimal end  
 end
