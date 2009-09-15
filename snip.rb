@@ -1,4 +1,4 @@
-%w(rubygems sinatra dm-core dm-timestamps uri).each  { |lib| require lib}
+%w(rubygems sinatra dm-core dm-timestamps uri alphadecimal).each  { |lib| require lib}
 
 get '/' do haml :index end
 
@@ -21,8 +21,10 @@ class Url
   property  :id,          Serial
   property  :original,    String, :length => 255
   property  :created_at,  DateTime  
-  def snipped() self.id.to_s(36) end  
+  def snipped() self.id.alphadecimal end  
 end
+
+#DataMapper.auto_migrate!
 
 __END__
 
@@ -46,9 +48,3 @@ __END__
   Snip this:
   %input{:type => 'text', :name => 'original', :size => '50'} 
   %input{:type => 'submit', :value => 'snip!'}
-%small copyright &copy;
-%a{:href => 'http://blog.saush.com'}
-  Chang Sau Sheong
-%br
-  %a{:href => 'http://github.com/sausheong/snip'}
-    Full source code
